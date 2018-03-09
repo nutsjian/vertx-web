@@ -72,6 +72,12 @@ public class RouterImpl implements Router {
   private final AtomicInteger orderSequence = new AtomicInteger();
   private Handler<Throwable> exceptionHandler;
 
+
+  /**
+   * 这里每次 http request 接收到请求的时候都会创建一个新的 RoutingContext
+   * 所以 RoutingContext 的生命周期是 一次 请求到响应
+   * @param request  the request
+   */
   @Override
   public void accept(HttpServerRequest request) {
     if (log.isTraceEnabled()) log.trace("Router: " + System.identityHashCode(this) +
